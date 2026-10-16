@@ -22,7 +22,10 @@ class LivrariaFluxosTestCase(unittest.TestCase):
         resposta = self.client.get('/carrinho')
 
         self.assertEqual(resposta.status_code, 200)
-        self.assertIn(b'https://covers.openlibrary.org/b/id/647501-M.jpg', resposta.data)
+        self.assertIn(
+            b'/static/image/capa-dom-casmurro.jpg',
+            resposta.data,
+        )
         self.assertIn(b'<img', resposta.data)
         self.assertNotIn('📗'.encode(), resposta.data)
 

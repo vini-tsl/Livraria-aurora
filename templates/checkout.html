@@ -139,7 +139,7 @@
       {% for item in itens %}
       <div class="checkout-mini-item">
         {% if item.livro.imagem %}
-          <img src="{{ item.livro.imagem }}" alt="Capa de {{ item.livro.titulo }}" loading="lazy">
+          <img src="{{ item.livro.imagem if item.livro.imagem.startswith('http') else url_for('static', filename=item.livro.imagem) }}" alt="Capa de {{ item.livro.titulo }}" loading="lazy">
         {% else %}
           <span class="checkout-mini-emoji" style="background: {{ item.livro.cor_capa }};">{{ item.livro.emoji }}</span>
         {% endif %}

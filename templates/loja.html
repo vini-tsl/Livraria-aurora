@@ -36,7 +36,7 @@
     <div class="card-livro fadeUp" data-categoria="{{ livro.categoria }}">
       <div class="card-livro-capa" style="background: {{ livro.cor_capa }};">
         {% if livro.imagem %}
-          <img src="{{ livro.imagem }}" alt="Capa de {{ livro.titulo }}" loading="lazy">
+          <img src="{{ livro.imagem if livro.imagem.startswith('http') else url_for('static', filename=livro.imagem) }}" alt="Capa de {{ livro.titulo }}" loading="lazy">
         {% else %}
           <span>{{ livro.emoji }}</span>
         {% endif %}

@@ -24,7 +24,7 @@
         <div class="carrinho-item">
           <div class="carrinho-item-capa" style="background: {{ item.livro.cor_capa }};">
             {% if item.livro.imagem %}
-              <img src="{{ item.livro.imagem }}" alt="Capa de {{ item.livro.titulo }}" loading="lazy">
+              <img src="{{ item.livro.imagem if item.livro.imagem.startswith('http') else url_for('static', filename=item.livro.imagem) }}" alt="Capa de {{ item.livro.titulo }}" loading="lazy">
             {% else %}
               <span>{{ item.livro.emoji }}</span>
             {% endif %}
