@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% block titulo %}Livraria — Acervo{% endblock %}
+
+{% block conteudo %}
+
+<!-- CABEÇALHO DA LOJA -->
+<div style="background: var(--marrom); padding: 48px 5% 40px;">
+  <p style="font-family: var(--fonte-ui); font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--dourado); margin-bottom: 0.6rem;">✦ Nosso acervo</p>
+  <h1 style="font-family: var(--fonte-titulo); font-size: clamp(1.8rem,4vw,2.8rem); color: var(--creme); font-weight: 600;">Todos os livros</h1>
+  <p style="font-family: var(--fonte-corpo); color: var(--creme-escuro); opacity: 0.7; font-style: italic; margin-top: 0.5rem;">{{ livros|length }} títulos disponíveis</p>
+</div>
+
+<section class="secao">
+
+  <!-- FILTROS -->
+  <div class="filtros">
+    <button class="filtro-btn ativo" onclick="filtrar(this, 'todos')">Todos</button>
+    {% for cat in categorias %}
+      <button class="filtro-btn" onclick="filtrar(this, '{{ cat.slug }}')">{{ cat.nome }}</button>
+    {% endfor %}
+  </div>
+
+  <!-- GRID DE LIVROS -->
+  <div class="grid-livros" id="grid-livros">
+    {% for livro in livros %}
+    <div class="card-livro fadeUp" data-categoria="{{ livro.categoria }}">
+      <div class="card-livro-capa" style="background: {{ livro.cor_capa }};">
+        {% if livro.id == 1 %}
+          <img src="{{ url_for('static', filename='image/dom_casmurro.png') }}" alt="Capa de Dom Casmurro">
+        {% elif livro.id == 2 %}
+          <img src="{{ url_for('static', filename='image/grande_sertao_veredas.png') }}" alt="Capa de Grande Sertão: Veredas">
+        {% elif livro.id == 3 %}
+          <img src="{{ url_for('static', filename='image/a_hora_da_estrela.png') }}" alt="Capa de A Hora da Estrela">
+        {% elif livro.id == 4 %}
+          <img src="{{ url_for('static', filename='image/cem_anos_de_solidao.png') }}" alt="Capa de Cem Anos de Solidão">
+        {% elif livro.id == 5 %}
+          <img src="{{ url_for('static', filename='image/uma_breve_historia_do_tempo.png') }}" alt="Capa de Uma Breve História do Tempo">
+        {% elif livro.id == 6 %}
+          <img src="{{ url_for('static', filename='image/sapiens.png') }}" alt="Capa de Sapiens">
+        {% elif livro.id == 7 %}
+          <img src="{{ url_for('static', filename='image/o_senhor_dos_aneis.png') }}" alt="Capa de O Senhor dos Anéis">
+        {% elif livro.id == 8 %}
+          <img src="{{ url_for('static', filename='image/o_pequeno_principe.png') }}" alt="Capa de O Pequeno Príncipe">
+        {% elif livro.id == 9 %}
+          <img src="{{ url_for('static', filename='image/de_zero_a_um.png') }}" alt="Capa de De Zero a Um">
+        {% elif livro.id == 10 %}
+          <img src="{{ url_for('static', filename='image/iracema.png') }}" alt="Capa de Iracema">
+        {% elif livro.id == 11 %}
+          <img src="{{ url_for('static', filename='image/cosmos.png') }}" alt="Capa de Cosmos">
+        {% elif livro.id == 12 %}
+          <img src="{{ url_for('static', filename='image/a_revolucao_dos_bichos.png') }}" alt="Capa de A Revolução dos Bichos">
+        {% else %}
+          <span>{{ livro.emoji }}</span>
+        {% endif %}
+      </div>
+      <div class="card-livro-info">
+        <p class="card-livro-titulo">{{ livro.titulo }}</p>
+        <p class="card-livro-autor">{{ livro.autor }}</p>
+        <p class="card-livro-preco">R$ {{ "%.2f"|format(livro.preco) }}</p>
+
+        {% if session.get('usuario') %}
+          <form method="POST" action="{{ url_for('adicionar_carrinho', livro_id=livro.id) }}" class="card-livro-btn">
+            <button type="submit" class="btn btn-primario card-livro-btn">
+              <i class="fas fa-shopping-bag" style="margin-right: 6px;"></i>Comprar
+            </button>
+          </form>
+        {% else %}
+          <a href="{{ url_for('login') }}" class="btn btn-escuro card-livro-btn">
+            Entre para comprar
+          </a>
+        {% endif %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  function filtrar(botao, categoria) {
+    document.querySelectorAll('.filtro-btn').forEach(b => b.classList.remove('ativo'));
+    botao.classList.add('ativo');
+
+    document.querySelectorAll('.card-livro').forEach(card => {
+      if (categoria === 'todos' || card.dataset.categoria === categoria) {
+        card.style.display = '';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+</script>
+{% endblock %}

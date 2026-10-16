@@ -1,0 +1,186 @@
+{% extends "base.html" %}
+{% block titulo %}Livraria — Finalizar compra{% endblock %}
+
+{% block conteudo %}
+
+<div style="background: var(--marrom); padding: 48px 5% 40px;">
+  <p style="font-family: var(--fonte-ui); font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--dourado); margin-bottom: 0.6rem;">✦ Quase lá</p>
+  <h1 style="font-family: var(--fonte-titulo); font-size: clamp(1.8rem,4vw,2.8rem); color: var(--creme); font-weight: 600;">Finalizar compra</h1>
+</div>
+
+<section class="secao">
+  <form method="POST" action="{{ url_for('finalizar_compra') }}" class="checkout-layout" novalidate>
+
+    <div class="checkout-form">
+
+      <!-- ENDEREÇO -->
+      <div class="checkout-bloco">
+        <h2>Endereço de entrega</h2>
+        <div class="campo-grade">
+          <div class="campo">
+            <label for="nome">Nome completo</label>
+            <input type="text" id="nome" name="nome" required autocomplete="name"
+                   value="{{ dados.get('nome', nome_usuario) }}">
+          </div>
+          <div class="campo c-2">
+            <label for="cep">CEP</label>
+            <input type="text" id="cep" name="cep" required inputmode="numeric" maxlength="9"
+                   placeholder="00000-000" autocomplete="postal-code" value="{{ dados.get('cep', '') }}">
+          </div>
+          <div class="campo c-4">
+            <label for="rua">Rua</label>
+            <input type="text" id="rua" name="rua" required autocomplete="address-line1"
+                   value="{{ dados.get('rua', '') }}">
+          </div>
+          <div class="campo c-2">
+            <label for="numero">Número</label>
+            <input type="text" id="numero" name="numero" required value="{{ dados.get('numero', '') }}">
+          </div>
+          <div class="campo c-4">
+            <label for="complemento">Complemento <span style="opacity:.6;text-transform:none;letter-spacing:0;">(opcional)</span></label>
+            <input type="text" id="complemento" name="complemento" value="{{ dados.get('complemento', '') }}">
+          </div>
+          <div class="campo c-3">
+            <label for="bairro">Bairro</label>
+            <input type="text" id="bairro" name="bairro" required value="{{ dados.get('bairro', '') }}">
+          </div>
+          <div class="campo c-3">
+            <label for="cidade">Cidade</label>
+            <input type="text" id="cidade" name="cidade" required autocomplete="address-level2"
+                   value="{{ dados.get('cidade', '') }}">
+          </div>
+          <div class="campo c-2">
+            <label for="estado">Estado</label>
+            <select id="estado" name="estado" required>
+              <option value="">UF</option>
+              {% for uf in estados %}
+                <option value="{{ uf }}" {% if dados.get('estado') == uf %}selected{% endif %}>{{ uf }}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- PAGAMENTO -->
+      <div class="checkout-bloco">
+        <h2>Forma de pagamento</h2>
+
+        {% set forma = dados.get('pagamento', 'pix') %}
+        <div class="pagamento-opcoes">
+          <label class="pagamento-opcao">
+            <input type="radio" name="pagamento" value="pix" {% if forma == 'pix' %}checked{% endif %}>
+            <span><i class="fas fa-qrcode"></i>Pix</span>
+          </label>
+          <label class="pagamento-opcao">
+            <input type="radio" name="pagamento" value="cartao" {% if forma == 'cartao' %}checked{% endif %}>
+            <span><i class="fas fa-credit-card"></i>Cartão</span>
+          </label>
+          <label class="pagamento-opcao">
+            <input type="radio" name="pagamento" value="boleto" {% if forma == 'boleto' %}checked{% endif %}>
+            <span><i class="fas fa-barcode"></i>Boleto</span>
+          </label>
+        </div>
+
+        <div class="pagamento-detalhe" id="det-pix">
+          <p class="pagamento-aviso">O código Pix será gerado após a confirmação do pedido.</p>
+        </div>
+
+        <div class="pagamento-detalhe" id="det-boleto">
+          <p class="pagamento-aviso">O boleto será gerado após a confirmação e vence em 3 dias úteis.</p>
+        </div>
+
+        <div class="pagamento-detalhe" id="det-cartao">
+          <div class="campo-grade">
+            <div class="campo">
+              <label for="cartao_numero">Número do cartão</label>
+              <input type="text" id="cartao_numero" inputmode="numeric" maxlength="19"
+                     placeholder="0000 0000 0000 0000" autocomplete="cc-number">
+            </div>
+            <div class="campo">
+              <label for="cartao_nome">Nome impresso no cartão</label>
+              <input type="text" id="cartao_nome" autocomplete="cc-name">
+            </div>
+            <div class="campo c-2">
+              <label for="cartao_validade">Validade</label>
+              <input type="text" id="cartao_validade" inputmode="numeric" maxlength="5"
+                     placeholder="MM/AA" autocomplete="cc-exp">
+            </div>
+            <div class="campo c-2">
+              <label for="cartao_cvv">CVV</label>
+              <input type="password" id="cartao_cvv" inputmode="numeric" maxlength="4" autocomplete="cc-csc">
+            </div>
+            <div class="campo c-2">
+              <label for="parcelas">Parcelas</label>
+              <select id="parcelas" name="parcelas">
+                {% for n in range(1, 7) %}
+                  <option value="{{ n }}" {% if dados.get('parcelas') == n|string %}selected{% endif %}>
+                    {{ n }}x de R$ {{ "%.2f"|format(total / n) }}
+                  </option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+          <p class="pagamento-aviso">Os dados do cartão não são enviados nem armazenados nesta loja.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RESUMO -->
+    <aside class="carrinho-resumo">
+      <h2>Seu pedido</h2>
+      {% for item in itens %}
+      <div class="checkout-mini-item">
+        {% if item.livro.imagem %}
+          <img src="{{ item.livro.imagem if item.livro.imagem.startswith('http') else url_for('static', filename=item.livro.imagem) }}"
+               alt="Capa de {{ item.livro.titulo }}">
+        {% else %}
+          <span class="checkout-mini-emoji" style="background: {{ item.livro.cor_capa }};">{{ item.livro.emoji }}</span>
+        {% endif %}
+        <div>{{ item.livro.titulo }}<br><small>{{ item.quantidade }} × R$ {{ "%.2f"|format(item.livro.preco) }}</small></div>
+        <span>R$ {{ "%.2f"|format(item.subtotal) }}</span>
+      </div>
+      {% endfor %}
+
+      <div class="carrinho-resumo-linha" style="margin-top:1rem;">
+        <span>Frete</span><span class="carrinho-frete-gratis">Grátis</span>
+      </div>
+      <div class="carrinho-resumo-total">
+        <span>Total</span><span>R$ {{ "%.2f"|format(total) }}</span>
+      </div>
+
+      <button type="submit" class="btn btn-primario btn-form">Confirmar pedido</button>
+      <a href="{{ url_for('carrinho') }}" class="auth-link" style="display:block;">Voltar ao carrinho</a>
+    </aside>
+
+  </form>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  // Alterna os detalhes conforme a forma de pagamento
+  function atualizarPagamento() {
+    const forma = document.querySelector('input[name="pagamento"]:checked').value;
+    document.querySelectorAll('.pagamento-detalhe').forEach(el => el.classList.remove('ativo'));
+    document.getElementById('det-' + forma).classList.add('ativo');
+  }
+  document.querySelectorAll('input[name="pagamento"]').forEach(r => r.addEventListener('change', atualizarPagamento));
+  atualizarPagamento();
+
+  // Máscaras simples
+  const so = v => v.replace(/\D/g, '');
+  document.getElementById('cep').addEventListener('input', e => {
+    const v = so(e.target.value).slice(0, 8);
+    e.target.value = v.length > 5 ? v.slice(0, 5) + '-' + v.slice(5) : v;
+  });
+  document.getElementById('cartao_numero').addEventListener('input', e => {
+    e.target.value = so(e.target.value).slice(0, 16).replace(/(.{4})/g, '$1 ').trim();
+  });
+  document.getElementById('cartao_validade').addEventListener('input', e => {
+    const v = so(e.target.value).slice(0, 4);
+    e.target.value = v.length > 2 ? v.slice(0, 2) + '/' + v.slice(2) : v;
+  });
+</script>
+{% endblock %}

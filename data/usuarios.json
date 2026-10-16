@@ -1,0 +1,32 @@
+[
+  {
+    "nome": "cuidex",
+    "email": "kakaka@gmail.com",
+    "senha": "scrypt:32768:8:1$6p0zHlEbrGF2eoMp$21b84ff9d8dec18a5a5bb4203b46b4c3e8f85d51f079e78aa5f906b1a2fc78c58f5e09c9c257814a6b1154310e2cf4625af032515e12ae9fbb239e1fa23a053b"
+  },
+  {
+    "nome": "julinha",
+    "email": "juliesetgsgrsyg@gmail.com",
+    "senha": "scrypt:32768:8:1$lyTurLmFOu2rhfu8$b9429e53bc98a8ac4c83620475d605377802f6432a69ff5eff9f5593eede8b13ecffd8ea93bb6e81f2bcf94e18da00a320dfae9651d286f45174df97eeff8ef9"
+  },
+  {
+    "nome": "julie",
+    "email": "juliene@gmail.com",
+    "senha": "scrypt:32768:8:1$yMwvVi1IUk2OtlYb$09b9a58d399bfb4b204f3943cfb85db48dafe91856ece7d5baf03191408a61d11669757e06b398be779fd36212aff439d2c3c22fe181dcc0ca0ce8c4accf6f04"
+  },
+  {
+    "nome": "Ednaldo Dilorenzo",
+    "email": "ednaldo.dilorenzo@ifpb.edu.br",
+    "senha": "scrypt:32768:8:1$QZmhFRkCh709DvMY$88332d72c901f1338f036206ef4d78644678155703a18c237ea6f8551c884919b44d30f9693a02dbb91ed3aaec8e96d2490eb6410729010b2dd5fa696d7b7148"
+  },
+  {
+    "nome": "juliene",
+    "email": "juliene@gmail",
+    "senha": "scrypt:32768:8:1$l2atnKUbOjezeJWR$89ee34d93c386a524351a2e1b85d200d040a240f50665c5849e60b6a3072bdd0f5e2d05f72a78fa20cdfb2c09936c65e64f5dfa8476bc9235891d08df33e5d88"
+  },
+  {
+    "nome": "Ana Luiza Souza Quinto",
+    "email": "l@ah",
+    "senha": "scrypt:32768:8:1$7lNXrxLEom1bzygm$6c3fedcc5a5a119ccb522f7599282f70a9bde9c5b0789a837cd61b57a1f583e4bd23a31496d583bf9887cd35c76ea7ea4cfe0f2791a1392f1cd4a3781470c664"
+  }
+]

@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% block titulo %}Livraria — Início{% endblock %}
+
+{% block conteudo %}
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-conteudo">
+    <p class="hero-label">✦ Bem-vindo à Livraria</p>
+    <h1>Cada página,<br>uma <em>nova vida</em></h1>
+    <p>Explore nosso acervo cuidadosamente selecionado. De clássicos atemporais a lançamentos imperdíveis — aqui você encontra o livro certo.</p>
+    <div class="hero-acoes">
+      <a href="{{ url_for('loja') }}" class="btn btn-primario">Ver acervo</a>
+      {% if not session.get('usuario') %}
+        <a href="{{ url_for('cadastro') }}" class="btn btn-secundario">Criar conta</a>
+      {% endif %}
+    </div>
+  </div>
+  <div class="hero-deco">
+    <i class="fas fa-book-open"></i>
+  </div>
+</section>
+
+<!-- DESTAQUES -->
+<section class="secao">
+  <div class="secao-cabecalho">
+    <div>
+      <h2 class="secao-titulo fadeUp">Destaques do acervo</h2>
+      <p class="secao-subtitulo fadeUp-2">Selecionados com carinho para você</p>
+    </div>
+    <a href="{{ url_for('loja') }}" class="btn btn-escuro fadeUp-2">Ver todos</a>
+  </div>
+
+  <div class="grid-livros">
+    {% for livro in livros_destaque %}
+    <div class="card-livro fadeUp">
+      <div class="card-livro-capa" style="background: {{ livro.cor_capa }};">
+        {% if livro.id == 1 %}
+          <img src="{{ url_for('static', filename='image/dom_casmurro.png') }}" alt="Capa de Dom Casmurro">
+        {% elif livro.id == 2 %}
+          <img src="{{ url_for('static', filename='image/grande_sertao_veredas.png') }}" alt="Capa de Grande Sertão: Veredas">
+        {% elif livro.id == 3 %}
+          <img src="{{ url_for('static', filename='image/a_hora_da_estrela.png') }}" alt="Capa de A Hora da Estrela">
+        {% elif livro.id == 4 %}
+          <img src="{{ url_for('static', filename='image/cem_anos_de_solidao.png') }}" alt="Capa de Cem Anos de Solidão">
+        {% elif livro.id == 5 %}
+          <img src="{{ url_for('static', filename='image/uma_breve_historia_do_tempo.png') }}" alt="Capa de Uma Breve História do Tempo">
+        {% elif livro.id == 6 %}
+          <img src="{{ url_for('static', filename='image/sapiens.png') }}" alt="Capa de Sapiens">
+        {% elif livro.id == 7 %}
+          <img src="{{ url_for('static', filename='image/o_senhor_dos_aneis.png') }}" alt="Capa de O Senhor dos Anéis">
+        {% elif livro.id == 8 %}
+          <img src="{{ url_for('static', filename='image/o_pequeno_principe.png') }}" alt="Capa de O Pequeno Príncipe">
+        {% elif livro.id == 9 %}
+          <img src="{{ url_for('static', filename='image/de_zero_a_um.png') }}" alt="Capa de De Zero a Um">
+        {% elif livro.id == 10 %}
+          <img src="{{ url_for('static', filename='image/iracema.png') }}" alt="Capa de Iracema">
+        {% elif livro.id == 11 %}
+          <img src="{{ url_for('static', filename='image/cosmos.png') }}" alt="Capa de Cosmos">
+        {% elif livro.id == 12 %}
+          <img src="{{ url_for('static', filename='image/a_revolucao_dos_bichos.png') }}" alt="Capa de A Revolução dos Bichos">
+        {% else %}
+          <span>{{ livro.emoji }}</span>
+        {% endif %}
+      </div>
+      <div class="card-livro-info">
+        <p class="card-livro-titulo">{{ livro.titulo }}</p>
+        <p class="card-livro-autor">{{ livro.autor }}</p>
+        <p class="card-livro-preco">R$ {{ "%.2f"|format(livro.preco) }}</p>
+        <a href="{{ url_for('loja') }}" class="btn btn-escuro card-livro-btn">Ver na loja</a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- BANNER INTERMEDIÁRIO -->
+<div style="background: var(--marrom); padding: 56px 5%; text-align: center;">
+  <p style="font-family: var(--fonte-titulo); font-size: clamp(1.3rem,3vw,1.9rem); color: var(--creme); font-style: italic; margin-bottom: 1.2rem;">
+    "Uma sala sem livros é como um corpo sem alma."
+  </p>
+  <p style="font-family: var(--fonte-ui); font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--dourado);">— Cícero</p>
+</div>
+
+<!-- CATEGORIAS -->
+<section class="secao">
+  <h2 class="secao-titulo fadeUp" style="margin-bottom: 0.3rem;">Navegue por categoria</h2>
+  <p class="secao-subtitulo fadeUp-2">Encontre exatamente o que procura</p>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 1rem; margin-top: 1.5rem;">
+    {% for cat in categorias %}
+    <a href="{{ url_for('loja') }}?categoria={{ cat.slug }}"
+       style="background: var(--branco); border: 1px solid var(--creme-escuro); border-radius: 8px;
+              padding: 24px 16px; text-align: center; transition: all 0.3s; display: block;">
+      <div style="font-size: 2rem; margin-bottom: 10px;"><i class="{{ cat.emoji }}"></i></div>
+      <p style="font-family: var(--fonte-ui); font-size: 0.8rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--marrom-medio);">{{ cat.nome }}</p>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+
+{% endblock %}

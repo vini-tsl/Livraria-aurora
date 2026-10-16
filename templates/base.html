@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block titulo %}Livraria Aurora{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  {% block extra_css %}{% endblock %}
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a href="{{ url_for('index') }}" class="navbar-logo">
+
+      <span>Livraria Aurora</span>
+    </a>
+    <ul class="navbar-links">
+      <li><a href="{{ url_for('index') }}" {% if request.endpoint == 'index' %}class="ativo"{% endif %}>Início</a></li>
+      <li><a href="{{ url_for('loja') }}" {% if request.endpoint == 'loja' %}class="ativo"{% endif %}>Livros</a></li>
+
+      {% if session.get('usuario') %}
+        <li>
+          <a href="{{ url_for('carrinho') }}" class="navbar-carrinho" {% if request.endpoint == 'carrinho' %}class="ativo"{% endif %} aria-label="Carrinho de compras">
+            <i class="fas fa-shopping-bag"></i>
+            {% if qtd_carrinho and qtd_carrinho > 0 %}
+              <span class="navbar-carrinho-badge">{{ qtd_carrinho }}</span>
+            {% endif %}
+          </a>
+        </li>
+        <li class="navbar-usuario">Olá, {{ session['usuario'] }}</li>
+        <li><a href="{{ url_for('logout') }}">Sair</a></li>
+      {% else %}
+        <li><a href="{{ url_for('login') }}" {% if request.endpoint == 'login' %}class="ativo"{% endif %}>Entrar</a></li>
+        <li><a href="{{ url_for('cadastro') }}" class="btn-nav">Cadastrar</a></li>
+      {% endif %}
+    </ul>
+  </nav>
+
+  <!-- FLASH MESSAGES -->
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div style="padding: 0 5%; margin-top: 1rem;">
+        {% for categoria, mensagem in messages %}
+          <div class="flash flash-{{ categoria }}">{{ mensagem }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  <!-- CONTEÚDO DA PÁGINA -->
+  {% block conteudo %}{% endblock %}
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-topo">
+      <div>
+        <div class="footer-logo">Livraria Aurora</div>
+        <p class="footer-desc">Onde cada livro encontra o seu leitor.</p>
+      </div>
+      <nav class="footer-nav">
+        <a href="{{ url_for('index') }}">Início</a>
+        <a href="{{ url_for('loja') }}">Livros</a>
+        <a href="{{ url_for('login') }}">Entrar</a>
+        <a href="{{ url_for('cadastro') }}">Cadastrar</a>
+      </nav>
+    </div>
+  </footer>
+
+  {% block extra_js %}{% endblock %}
+</body>
+</html>

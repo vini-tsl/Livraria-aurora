@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% block titulo %}Livraria — Carrinho{% endblock %}
+
+{% block conteudo %}
+
+<!-- CABEÇALHO -->
+<div style="background: var(--marrom); padding: 48px 5% 40px;">
+  <p style="font-family: var(--fonte-ui); font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--dourado); margin-bottom: 0.6rem;">✦ Sua sacola</p>
+  <h1 style="font-family: var(--fonte-titulo); font-size: clamp(1.8rem,4vw,2.8rem); color: var(--creme); font-weight: 600;">Carrinho de compras</h1>
+  <p style="font-family: var(--fonte-corpo); color: var(--creme-escuro); opacity: 0.7; font-style: italic; margin-top: 0.5rem;">
+    {% if itens %}{{ itens|length }} {{ 'item' if itens|length == 1 else 'itens' }} no carrinho{% else %}Seu carrinho está vazio{% endif %}
+  </p>
+</div>
+
+<section class="secao">
+
+  {% if itens %}
+
+    <div class="carrinho-layout">
+
+      <!-- LISTA DE ITENS -->
+      <div class="carrinho-itens">
+        {% for item in itens %}
+        <div class="carrinho-item">
+          <div class="carrinho-item-capa" style="background: {{ item.livro.cor_capa }};">
+            {% if item.livro.imagem %}
+              <img
+                src="{{ item.livro.imagem if item.livro.imagem.startswith('http') else url_for('static', filename=item.livro.imagem) }}"
+                alt="Capa de {{ item.livro.titulo }}"
+                loading="lazy"
+              >
+            {% else %}
+              <span>{{ item.livro.emoji }}</span>
+            {% endif %}
+          </div>
+
+          <div class="carrinho-item-info">
+            <p class="carrinho-item-titulo">{{ item.livro.titulo }}</p>
+            <p class="carrinho-item-autor">{{ item.livro.autor }}</p>
+            <p class="carrinho-item-preco">R$ {{ "%.2f"|format(item.livro.preco) }} un.</p>
+          </div>
+
+          <form method="POST" action="{{ url_for('atualizar_carrinho', livro_id=item.livro.id) }}" class="carrinho-item-qtd">
+            <label for="qtd-{{ item.livro.id }}" class="sr-only">Quantidade</label>
+            <input
+              type="number"
+              id="qtd-{{ item.livro.id }}"
+              name="quantidade"
+              value="{{ item.quantidade }}"
+              min="1"
+              max="99"
+              onchange="this.form.submit()"
+            >
+          </form>
+
+          <p class="carrinho-item-subtotal">R$ {{ "%.2f"|format(item.subtotal) }}</p>
+
+          <form method="POST" action="{{ url_for('remover_carrinho', livro_id=item.livro.id) }}">
+            <button type="submit" class="carrinho-item-remover" aria-label="Remover {{ item.livro.titulo }}">
+              <i class="fas fa-trash-can"></i>
+            </button>
+          </form>
+        </div>
+        {% endfor %}
+      </div>
+
+      <!-- RESUMO -->
+      <div class="carrinho-resumo">
+        <h2>Resumo do pedido</h2>
+
+        <div class="carrinho-resumo-linha">
+          <span>Subtotal</span>
+          <span>R$ {{ "%.2f"|format(total) }}</span>
+        </div>
+        <div class="carrinho-resumo-linha">
+          <span>Frete</span>
+          <span class="carrinho-frete-gratis">Grátis</span>
+        </div>
+
+        <div class="carrinho-resumo-total">
+          <span>Total</span>
+          <span>R$ {{ "%.2f"|format(total) }}</span>
+        </div>
+
+        <a href="{{ url_for('finalizar_compra') }}" class="btn btn-primario btn-form" style="display:block;text-align:center;">Finalizar compra</a>
+
+        <a href="{{ url_for('loja') }}" class="auth-link" style="display: block;">Continuar comprando</a>
+      </div>
+
+    </div>
+
+  {% else %}
+
+    <!-- CARRINHO VAZIO -->
+    <div class="carrinho-vazio">
+      <i class="fas fa-shopping-bag"></i>
+      <h2>Seu carrinho está vazio</h2>
+      <p>Que tal explorar nosso acervo e encontrar seu próximo livro favorito?</p>
+      <a href="{{ url_for('loja') }}" class="btn btn-primario">Ver acervo</a>
+    </div>
+
+  {% endif %}
+
+</section>
+
+{% endblock %}

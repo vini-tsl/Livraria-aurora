@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block titulo %}Livraria — Entrar{% endblock %}
+
+{% block conteudo %}
+<div class="pagina-auth">
+  <div class="card-auth">
+
+    <div class="card-auth-topo">
+      <h2>Bem-vindo de volta</h2>
+      <p>Entre na sua conta para continuar</p>
+    </div>
+
+    <div class="card-auth-corpo">
+
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for categoria, mensagem in messages %}
+            <div class="flash flash-{{ categoria }}">{{ mensagem }}</div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+
+      <form method="POST" action="{{ url_for('login') }}">
+
+        <div class="campo">
+          <label for="email">E-mail</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="seu@email.com"
+            required
+            autocomplete="email"
+            value="{{ request.form.get('email', '') }}"
+          >
+        </div>
+
+        <div class="campo">
+          <label for="senha">Senha</label>
+          <input
+            type="password"
+            id="senha"
+            name="senha"
+            placeholder="••••••••"
+            required
+            autocomplete="current-password"
+          >
+        </div>
+
+        <button type="submit" class="btn btn-primario btn-form">Entrar</button>
+
+      </form>
+
+      <p class="auth-link">
+        Ainda não tem conta? <a href="{{ url_for('cadastro') }}">Cadastre-se</a>
+      </p>
+
+    </div>
+  </div>
+</div>
+{% endblock %}

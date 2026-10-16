@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Livraria Aurora — Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+:root {
+  --creme:#F5EDD9;--creme-escuro:#EAD9B8;--marrom:#2C1503;--marrom-medio:#5C3317;
+  --dourado:#B8882A;--dourado-claro:#D4A84B;--tinta:#1A0A00;--texto:#3A2010;
+  --texto-leve:#7A5C3A;--branco:#FFFDF7;
+  --fonte-titulo:'Playfair Display',Georgia,serif;
+  --fonte-corpo:'EB Garamond',Georgia,serif;
+  --fonte-ui:'Jost',sans-serif;
+  --sombra-card:0 4px 24px rgba(44,21,3,0.13);--raio:4px;--raio-lg:8px;--t:0.3s ease;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--creme);color:var(--texto);font-family:var(--fonte-corpo);font-size:17px;line-height:1.75}
+body::before{content:'';display:block;height:4px;background:linear-gradient(90deg,var(--marrom) 0%,var(--dourado) 50%,var(--marrom) 100%)}
+a{color:inherit;text-decoration:none}ul{list-style:none}
+
+/* NAVBAR */
+.navbar{background:var(--marrom);padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:68px;box-shadow:0 2px 16px rgba(0,0,0,0.35)}
+.navbar-logo{font-family:var(--fonte-titulo);font-size:1.55rem;font-weight:700;color:var(--creme);letter-spacing:.02em;display:flex;align-items:center;gap:10px}
+.navbar-logo span{color:var(--dourado-claro);font-style:italic}
+.navbar-links{display:flex;align-items:center;gap:2rem}
+.navbar-links a{font-family:var(--fonte-ui);font-size:.82rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--creme-escuro);transition:color var(--t);padding-bottom:2px;border-bottom:1px solid transparent}
+.navbar-links a:hover,.navbar-links a.ativo{color:var(--dourado-claro);border-bottom-color:var(--dourado-claro)}
+.btn-nav{background:var(--dourado);color:var(--marrom)!important;padding:7px 20px;border-radius:var(--raio);font-weight:500;border-bottom:none!important}
+.btn-nav:hover{background:var(--dourado-claro)!important}
+
+/* TABS DEMO */
+.demo-tabs{display:flex;gap:0;background:var(--tinta);padding:0 5%}
+.demo-tab{font-family:var(--fonte-ui);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;padding:12px 22px;color:rgba(245,237,217,.45);cursor:pointer;border-bottom:2px solid transparent;transition:all .3s}
+.demo-tab.ativo{color:var(--dourado-claro);border-bottom-color:var(--dourado-claro)}
+.demo-page{display:none}.demo-page.ativo{display:block}
+
+/* HERO */
+.hero{background:var(--marrom);padding:90px 5% 80px;display:flex;align-items:center;justify-content:space-between;gap:3rem;overflow:hidden;position:relative}
+.hero::after{content:'';position:absolute;right:-60px;top:-60px;width:420px;height:420px;border:1px solid rgba(184,136,42,.15);border-radius:50%;pointer-events:none}
+.hero-label{font-family:var(--fonte-ui);font-size:.72rem;letter-spacing:.25em;text-transform:uppercase;color:var(--dourado);margin-bottom:1rem}
+.hero h1{font-family:var(--fonte-titulo);font-size:clamp(2.4rem,5vw,3.4rem);font-weight:700;color:var(--creme);line-height:1.15;margin-bottom:1.2rem}
+.hero h1 em{color:var(--dourado-claro);font-style:italic}
+.hero p{font-family:var(--fonte-corpo);font-size:1.1rem;color:var(--creme-escuro);opacity:.85;margin-bottom:2.2rem;max-width:460px}
+.hero-acoes{display:flex;gap:1rem;flex-wrap:wrap}
+.hero-deco{display:flex;gap:12px;opacity:.12;font-size:7rem;line-height:1;user-select:none;flex-direction:column;align-items:flex-end}
+
+/* BOTÕES */
+.btn{display:inline-block;font-family:var(--fonte-ui);font-size:.82rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;padding:12px 28px;border-radius:var(--raio);border:none;cursor:pointer;transition:all var(--t);text-align:center;text-decoration:none}
+.btn-primario{background:var(--dourado);color:var(--marrom)}.btn-primario:hover{background:var(--dourado-claro);transform:translateY(-2px)}
+.btn-secundario{background:transparent;color:var(--creme);border:1px solid rgba(245,237,217,.35)}.btn-secundario:hover{border-color:var(--dourado);color:var(--dourado-claro)}
+.btn-escuro{background:var(--marrom);color:var(--creme)}.btn-escuro:hover{background:var(--marrom-medio);transform:translateY(-2px)}
+
+/* SECOES */
+.secao{padding:64px 5%}
+.secao-titulo{font-family:var(--fonte-titulo);font-size:clamp(1.6rem,3vw,2.2rem);font-weight:600;color:var(--marrom);margin-bottom:.4rem}
+.secao-subtitulo{font-family:var(--fonte-corpo);font-size:1rem;color:var(--texto-leve);margin-bottom:2.5rem;font-style:italic}
+.secao-cabecalho{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--creme-escuro)}
+
+/* CARDS */
+.grid-livros{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:1.8rem}
+.card-livro{background:var(--branco);border-radius:var(--raio-lg);box-shadow:var(--sombra-card);overflow:hidden;transition:transform var(--t),box-shadow var(--t);cursor:pointer;border:1px solid var(--creme-escuro)}
+.card-livro:hover{transform:translateY(-5px);box-shadow:0 12px 32px rgba(44,21,3,.18)}
+.card-livro-capa{width:100%;aspect-ratio:2/3;display:flex;align-items:center;justify-content:center;font-size:3.5rem;border-bottom:1px solid var(--creme-escuro);position:relative;overflow:hidden}
+.card-livro-capa::after{content:'';position:absolute;left:0;top:0;width:8px;height:100%;background:rgba(44,21,3,.12)}
+.card-livro-info{padding:14px 16px 18px}
+.card-livro-titulo{font-family:var(--fonte-titulo);font-size:.95rem;font-weight:600;color:var(--marrom);line-height:1.3;margin-bottom:4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.card-livro-autor{font-family:var(--fonte-ui);font-size:.74rem;color:var(--texto-leve);letter-spacing:.05em;margin-bottom:12px}
+.card-livro-preco{font-family:var(--fonte-titulo);font-size:1.1rem;font-weight:700;color:var(--dourado)}
+.card-livro-btn{width:100%;margin-top:10px;padding:9px;font-size:.75rem}
+
+/* AUTH */
+.pagina-auth{min-height:calc(100vh - 72px);display:flex;align-items:center;justify-content:center;padding:48px 5%;background-image:repeating-linear-gradient(0deg,transparent,transparent 34px,rgba(184,136,42,.06) 35px)}
+.card-auth{background:var(--branco);border-radius:var(--raio-lg);box-shadow:var(--sombra-card);width:100%;max-width:440px;overflow:hidden;border:1px solid var(--creme-escuro)}
+.card-auth-topo{background:var(--marrom);padding:32px 36px 28px;text-align:center;border-bottom:3px solid var(--dourado)}
+.card-auth-topo h2{font-family:var(--fonte-titulo);font-size:1.6rem;color:var(--creme);font-weight:600;margin-bottom:6px}
+.card-auth-topo p{font-family:var(--fonte-corpo);font-size:.9rem;color:var(--creme-escuro);opacity:.7;font-style:italic}
+.card-auth-corpo{padding:36px}
+.campo{margin-bottom:1.4rem}
+.campo label{display:block;font-family:var(--fonte-ui);font-size:.75rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--texto-leve);margin-bottom:8px}
+.campo input{width:100%;padding:11px 14px;border:1px solid var(--creme-escuro);border-radius:var(--raio);background:var(--creme);font-family:var(--fonte-corpo);font-size:1rem;color:var(--texto);transition:border-color var(--t),box-shadow var(--t);outline:none}
+.campo input:focus{border-color:var(--dourado);box-shadow:0 0 0 3px rgba(184,136,42,.15);background:var(--branco)}
+.campo input::placeholder{color:var(--texto-leve);opacity:.5}
+.btn-form{width:100%;padding:13px;font-size:.84rem;margin-top:.5rem}
+.auth-link{text-align:center;margin-top:1.4rem;font-family:var(--fonte-corpo);font-size:.92rem;color:var(--texto-leve)}
+.auth-link a{color:var(--dourado);border-bottom:1px solid transparent;transition:border-color var(--t)}
+.auth-link a:hover{border-bottom-color:var(--dourado)}
+
+/* FILTROS */
+.filtros{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:2rem}
+.filtro-btn{font-family:var(--fonte-ui);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;padding:7px 18px;border-radius:20px;border:1px solid var(--creme-escuro);background:transparent;color:var(--texto-leve);cursor:pointer;transition:all var(--t)}
+.filtro-btn:hover,.filtro-btn.ativo{background:var(--marrom);color:var(--creme);border-color:var(--marrom)}
+
+/* FOOTER */
+footer{background:var(--tinta);color:var(--creme-escuro);padding:48px 5% 28px;margin-top:4rem}
+.footer-topo{display:flex;justify-content:space-between;align-items:flex-start;gap:2rem;padding-bottom:2rem;border-bottom:1px solid rgba(245,237,217,.1);margin-bottom:1.5rem;flex-wrap:wrap}
+.footer-logo{font-family:var(--fonte-titulo);font-size:1.4rem;color:var(--creme);font-style:italic;margin-bottom:8px}
+.footer-desc{font-size:.88rem;opacity:.5;max-width:240px;font-style:italic}
+.footer-nav a{display:block;font-family:var(--fonte-ui);font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;opacity:.5;margin-bottom:10px;transition:opacity var(--t)}
+.footer-nav a:hover{opacity:1}
+.footer-rodape{font-family:var(--fonte-ui);font-size:.75rem;opacity:.3;letter-spacing:.05em;text-align:center}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.fadeUp{animation:fadeUp .6s ease both}
+</style>
+</head>
+<body>
+
+<!-- BARRA DE NAVEGAÇÃO DE DEMO -->
+<nav class="navbar">
+  <a href="#" class="navbar-logo">📖 <span>Livraria Aurora</span></a>
+  <ul class="navbar-links">
+    <li><a href="#" class="ativo">Início</a></li>
+    <li><a href="#">Livros</a></li>
+    <li><a href="#">Entrar</a></li>
+    <li><a href="#" class="btn-nav">Cadastrar</a></li>
+  </ul>
+</nav>
+
+<!-- TABS -->
+<div class="demo-tabs">
+  <div class="demo-tab ativo" onclick="mudarPagina('homepage', this)">Homepage</div>
+  <div class="demo-tab" onclick="mudarPagina('loja', this)">Loja</div>
+  <div class="demo-tab" onclick="mudarPagina('login', this)">Login</div>
+  <div class="demo-tab" onclick="mudarPagina('cadastro', this)">Cadastro</div>
+</div>
+
+<!-- ════ HOMEPAGE ════ -->
+<div class="demo-page ativo" id="page-homepage">
+
+  <section class="hero">
+    <div class="hero-conteudo">
+      <p class="hero-label">✦ Bem-vindo à Livraria Aurora</p>
+      <h1>Cada página,<br>uma <em>nova vida</em></h1>
+      <p>Explore nosso acervo cuidadosamente selecionado. De clássicos atemporais a lançamentos imperdíveis — aqui você encontra o livro certo.</p>
+      <div class="hero-acoes">
+        <a href="#" class="btn btn-primario">Ver acervo</a>
+        <a href="#" class="btn btn-secundario">Criar conta</a>
+      </div>
+    </div>
+    <div class="hero-deco"><span>📚</span><span>📖</span><span>🖋</span></div>
+  </section>
+
+  <section class="secao">
+    <div class="secao-cabecalho">
+      <div>
+        <h2 class="secao-titulo">Destaques do acervo</h2>
+        <p class="secao-subtitulo">Selecionados com carinho para você</p>
+      </div>
+      <a href="#" class="btn btn-escuro">Ver todos</a>
+    </div>
+    <div class="grid-livros">
+      <div class="card-livro"><div class="card-livro-capa" style="background:#D4C5A9"><img src="{{ url_for('static', filename='image/dom_casmurro.png') }}" alt="Capa de Dom Casmurro"></div><div class="card-livro-info"><p class="card-livro-titulo">Dom Casmurro</p><p class="card-livro-autor">Machado de Assis</p><p class="card-livro-preco">R$ 34,90</p><button class="btn btn-escuro card-livro-btn">Ver na loja</button></div></div>
+      <div class="card-livro"><div class="card-livro-capa" style="background:#C5B89A"><img src="{{ url_for('static', filename='image/grande_sertao_veredas.png') }}" alt="Capa de Grande Sertão: Veredas"></div><div class="card-livro-info"><p class="card-livro-titulo">Grande Sertão: Veredas</p><p class="card-livro-autor">Guimarães Rosa</p><p class="card-livro-preco">R$ 42,50</p><button class="btn btn-escuro card-livro-btn">Ver na loja</button></div></div>
+      <div class="card-livro"><div class="card-livro-capa" style="background:#BFA98A"><img src="{{ url_for('static', filename='image/a_hora_da_estrela.png') }}" alt="Capa de A Hora da Estrela"></div><div class="card-livro-info"><p class="card-livro-titulo">A Hora da Estrela</p><p class="card-livro-autor">Clarice Lispector</p><p class="card-livro-preco">R$ 29,90</p><button class="btn btn-escuro card-livro-btn">Ver na loja</button></div></div>
+      <div class="card-livro"><div class="card-livro-capa" style="background:#CCC0A0"><img src="{{ url_for('static', filename='image/cem_anos_de_solidao.png') }}" alt="Capa de Cem Anos de Solidão"></div><div class="card-livro-info"><p class="card-livro-titulo">Cem Anos de Solidão</p><p class="card-livro-autor">Gabriel García Márquez</p><p class="card-livro-preco">R$ 49,90</p><button class="btn btn-escuro card-livro-btn">Ver na loja</button></div></div>
+    </div>
+  </section>
+
+  <div style="background:var(--marrom);padding:56px 5%;text-align:center">
+    <p style="font-family:var(--fonte-titulo);font-size:clamp(1.3rem,3vw,1.9rem);color:var(--creme);font-style:italic;margin-bottom:1.2rem">"Uma sala sem livros é como um corpo sem alma."</p>
+    <p style="font-family:var(--fonte-ui);font-size:.78rem;letter-spacing:.15em;text-transform:uppercase;color:var(--dourado)">— Cícero</p>
+  </div>
+
+  <section class="secao">
+    <h2 class="secao-titulo" style="margin-bottom:.3rem">Navegue por categoria</h2>
+    <p class="secao-subtitulo">Encontre exatamente o que procura</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:1rem;margin-top:1.5rem">
+      <a href="#" style="background:var(--branco);border:1px solid var(--creme-escuro);border-radius:8px;padding:22px 16px;text-align:center;transition:all .3s;display:block"><div style="font-size:2rem;margin-bottom:8px;"><i class="fas fa-book"></i></div><p style="font-family:var(--fonte-ui);font-size:.78rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--marrom-medio)">Literatura</p></a>
+      <a href="#" style="background:var(--branco);border:1px solid var(--creme-escuro);border-radius:8px;padding:22px 16px;text-align:center;transition:all .3s;display:block"><div style="font-size:2rem;margin-bottom:8px">🔬</div><p style="font-family:var(--fonte-ui);font-size:.78rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--marrom-medio)">Ciências</p></a>
+      <a href="#" style="background:var(--branco);border:1px solid var(--creme-escuro);border-radius:8px;padding:22px 16px;text-align:center;transition:all .3s;display:block"><div style="font-size:2rem;margin-bottom:8px">🏛</div><p style="font-family:var(--fonte-ui);font-size:.78rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--marrom-medio)">História</p></a>
+      <a href="#" style="background:var(--branco);border:1px solid var(--creme-escuro);border-radius:8px;padding:22px 16px;text-align:center;transition:all .3s;display:block"><div style="font-size:2rem;margin-bottom:8px">🌌</div><p style="font-family:var(--fonte-ui);font-size:.78rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--marrom-medio)">Ficção</p></a>
+      <a href="#" style="background:var(--branco);border:1px solid var(--creme-escuro);border-radius:8px;padding:22px 16px;text-align:center;transition:all .3s;display:block"><div style="font-size:2rem;margin-bottom:8px">💼</div><p style="font-family:var(--fonte-ui);font-size:.78rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--marrom-medio)">Negócios</p></a>
+      <a href="#" style="background:var(--branco);border:1px solid var(--creme-escuro);border-radius:8px;padding:22px 16px;text-align:center;transition:all .3s;display:block"><div style="font-size:2rem;margin-bottom:8px">🧒</div><p style="font-family:var(--fonte-ui);font-size:.78rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--marrom-medio)">Infantil</p></a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-topo">
+      <div><div class="footer-logo">Livraria Aurora</div><p class="footer-desc">Onde cada livro encontra o seu leitor.</p></div>
+      <nav class="footer-nav"><a href="#">Início</a><a href="#">Livros</a><a href="#">Entrar</a><a href="#">Cadastrar</a></nav>
+    </div>
+    <p class="footer-rodape">© 2026 Livraria Aurora— Todos os direitos reservados</p>
+  </footer>
+</div>
+
+<!-- ════ LOJA ════ -->
+<div class="demo-page" id="page-loja">
+  <div style="background:var(--marrom);padding:48px 5% 40px">
+    <p style="font-family:var(--fonte-ui);font-size:.72rem;letter-spacing:.25em;text-transform:uppercase;color:var(--dourado);margin-bottom:.6rem">✦ Nosso acervo</p>
+    <h1 style="font-family:var(--fonte-titulo);font-size:clamp(1.8rem,4vw,2.8rem);color:var(--creme);font-weight:600">Todos os livros</h1>
+    <p style="font-family:var(--fonte-corpo);color:var(--creme-escuro);opacity:.7;font-style:italic;margin-top:.5rem">12 títulos disponíveis</p>
+  </div>
+  <section class="secao">
+    <div class="filtros">
+      <button class="filtro-btn ativo" onclick="filtrar(this,'todos')">Todos</button>
+      <button class="filtro-btn" onclick="filtrar(this,'literatura')">Literatura</button>
+      <button class="filtro-btn" onclick="filtrar(this,'ciencias')">Ciências</button>
+      <button class="filtro-btn" onclick="filtrar(this,'historia')">História</button>
+      <button class="filtro-btn" onclick="filtrar(this,'ficcao')">Ficção</button>
+    </div>
+    <div class="grid-livros" id="grid">
+      <div class="card-livro" data-cat="literatura"><div class="card-livro-capa" style="background:#D4C5A9"><img src="{{ url_for('static', filename='image/dom_casmurro.png') }}" alt="Capa de Dom Casmurro"></div><div class="card-livro-info"><p class="card-livro-titulo">Dom Casmurro</p><p class="card-livro-autor">Machado de Assis</p><p class="card-livro-preco">R$ 34,90</p><button class="btn btn-primario card-livro-btn">Comprar</button></div></div>
+      <div class="card-livro" data-cat="literatura"><div class="card-livro-capa" style="background:#C5B89A"><img src="{{ url_for('static', filename='image/grande_sertao_veredas.png') }}" alt="Capa de Grande Sertão: Veredas"></div><div class="card-livro-info"><p class="card-livro-titulo">Grande Sertão: Veredas</p><p class="card-livro-autor">Guimarães Rosa</p><p class="card-livro-preco">R$ 42,50</p><button class="btn btn-primario card-livro-btn">Comprar</button></div></div>
+      <div class="card-livro" data-cat="literatura"><div class="card-livro-capa" style="background:#BFA98A"><img src="{{ url_for('static', filename='image/a_hora_da_estrela.png') }}" alt="Capa de A Hora da Estrela"></div><div class="card-livro-info"><p class="card-livro-titulo">A Hora da Estrela</p><p class="card-livro-autor">Clarice Lispector</p><p class="card-livro-preco">R$ 29,90</p><button class="btn btn-primario card-livro-btn">Comprar</button></div></div>
+      <div class="card-livro" data-cat="ficcao"><div class="card-livro-capa" style="background:#CCC0A0"><img src="{{ url_for('static', filename='image/cem_anos_de_solidao.png') }}" alt="Capa de Cem Anos de Solidão"></div><div class="card-livro-info"><p class="card-livro-titulo">Cem Anos de Solidão</p><p class="card-livro-autor">Gabriel García Márquez</p><p class="card-livro-preco">R$ 49,90</p><button class="btn btn-primario card-livro-btn">Comprar</button></div></div>
+      <div class="card-livro" data-cat="ciencias"><div class="card-livro-capa" style="background:#C8B896">🔬</div><div class="card-livro-info"><p class="card-livro-titulo">Uma Breve História do Tempo</p><p class="card-livro-autor">Stephen Hawking</p><p class="card-livro-preco">R$ 38,00</p><button class="btn btn-primario card-livro-btn">Comprar</button></div></div>
+      <div class="card-livro" data-cat="historia"><div class="card-livro-capa" style="background:#D0BC9A">🏛</div><div class="card-livro-info"><p class="card-livro-titulo">Sapiens</p><p class="card-livro-autor">Yuval Noah Harari</p><p class="card-livro-preco">R$ 54,90</p><button class="btn btn-primario card-livro-btn">Comprar</button></div></div>
+    </div>
+  </section>
+  <footer>
+    <div class="footer-topo">
+      <div><div class="footer-logo">Livraria Aurora</div><p class="footer-desc">Onde cada livro encontra o seu leitor.</p></div>
+      <nav class="footer-nav"><a href="#">Início</a><a href="#">Livros</a><a href="#">Entrar</a><a href="#">Cadastrar</a></nav>
+    </div>
+    <p class="footer-rodape">© 2026 Livraria Aurora — Todos os direitos reservados</p>
+  </footer>
+</div>
+
+<!-- ════ LOGIN ════ -->
+<div class="demo-page" id="page-login">
+  <div class="pagina-auth">
+    <div class="card-auth">
+      <div class="card-auth-topo">
+        <h2>Bem-vindo de volta</h2>
+        <p>Entre na sua conta para continuar</p>
+      </div>
+      <div class="card-auth-corpo">
+        <div class="campo"><label>E-mail</label><input type="email" placeholder="seu@email.com"></div>
+        <div class="campo"><label>Senha</label><input type="password" placeholder="••••••••"></div>
+        <button class="btn btn-primario btn-form">Entrar</button>
+        <p class="auth-link">Ainda não tem conta? <a href="#">Cadastre-se</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════ CADASTRO ════ -->
+<div class="demo-page" id="page-cadastro">
+  <div class="pagina-auth">
+    <div class="card-auth">
+      <div class="card-auth-topo">
+        <h2>Criar conta</h2>
+        <p>Junte-se à nossa comunidade de leitores</p>
+      </div>
+      <div class="card-auth-corpo">
+        <div class="campo"><label>Nome completo</label><input type="text" placeholder="Seu nome"></div>
+        <div class="campo"><label>E-mail</label><input type="email" placeholder="seu@email.com"></div>
+        <div class="campo"><label>Senha</label><input type="password" placeholder="Mínimo 6 caracteres"></div>
+        <div class="campo"><label>Confirmar senha</label><input type="password" placeholder="Repita a senha"></div>
+        <button class="btn btn-primario btn-form">Criar minha conta</button>
+        <p class="auth-link">Já tem uma conta? <a href="#">Entrar</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function mudarPagina(id, tab) {
+  document.querySelectorAll('.demo-page').forEach(p => p.classList.remove('ativo'));
+  document.querySelectorAll('.demo-tab').forEach(t => t.classList.remove('ativo'));
+  document.getElementById('page-' + id).classList.add('ativo');
+  tab.classList.add('ativo');
+  window.scrollTo(0, 0);
+}
+function filtrar(btn, cat) {
+  document.querySelectorAll('.filtro-btn').forEach(b => b.classList.remove('ativo'));
+  btn.classList.add('ativo');
+  document.querySelectorAll('.card-livro').forEach(c => {
+    c.style.display = (cat === 'todos' || c.dataset.cat === cat) ? '' : 'none';
+  });
+}
+</script>
+</body>
+</html>
