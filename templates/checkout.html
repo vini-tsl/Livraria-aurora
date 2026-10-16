@@ -9,9 +9,16 @@
 </div>
 
 <section class="secao">
-  <form method="POST" action="{{ url_for('finalizar_compra') }}" class="checkout-layout" novalidate>
+  <form method="POST" action="{{ url_for('finalizar_compra') }}" class="checkout-layout">
 
     <div class="checkout-form">
+
+      {% if erros %}
+        <div class="flash flash-erro" role="alert">
+          <p>Corrija os dados do endereço para continuar:</p>
+          <ul>{% for erro in erros %}<li>{{ erro }}</li>{% endfor %}</ul>
+        </div>
+      {% endif %}
 
       <!-- ENDEREÇO -->
       <div class="checkout-bloco">
@@ -68,7 +75,7 @@
         {% set forma = dados.get('pagamento', 'pix') %}
         <div class="pagamento-opcoes">
           <label class="pagamento-opcao">
-            <input type="radio" name="pagamento" value="pix" {% if forma == 'pix' %}checked{% endif %}>
+            <input type="radio" name="pagamento" value="pix" required {% if forma == 'pix' %}checked{% endif %}>
             <span><i class="fas fa-qrcode"></i>Pix</span>
           </label>
           <label class="pagamento-opcao">
@@ -132,8 +139,7 @@
       {% for item in itens %}
       <div class="checkout-mini-item">
         {% if item.livro.imagem %}
-          <img src="{{ item.livro.imagem if item.livro.imagem.startswith('http') else url_for('static', filename=item.livro.imagem) }}"
-               alt="Capa de {{ item.livro.titulo }}">
+          <img src="{{ item.livro.imagem }}" alt="Capa de {{ item.livro.titulo }}" loading="lazy">
         {% else %}
           <span class="checkout-mini-emoji" style="background: {{ item.livro.cor_capa }};">{{ item.livro.emoji }}</span>
         {% endif %}
@@ -149,7 +155,7 @@
         <span>Total</span><span>R$ {{ "%.2f"|format(total) }}</span>
       </div>
 
-      <button type="submit" class="btn btn-primario btn-form">Confirmar pedido</button>
+      <button type="submit" class="btn btn-primario btn-form">Revisar endereço e pedido</button>
       <a href="{{ url_for('carrinho') }}" class="auth-link" style="display:block;">Voltar ao carrinho</a>
     </aside>
 

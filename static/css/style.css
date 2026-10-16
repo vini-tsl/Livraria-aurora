@@ -533,6 +533,49 @@ body::before {
   margin-bottom: 2rem;
 }
 
+.busca-livros {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.busca-livros input {
+  flex: 1;
+  min-width: 0;
+  padding: 11px 14px;
+  border: 1px solid var(--creme-escuro);
+  border-radius: var(--raio);
+  background: var(--branco);
+  font-family: var(--fonte-corpo);
+  font-size: 1rem;
+  color: var(--texto);
+}
+
+.busca-livros input:focus {
+  outline: 2px solid var(--dourado);
+  outline-offset: 2px;
+}
+
+.busca-sem-resultados {
+  padding: 3rem 1rem;
+  text-align: center;
+  color: var(--texto-leve);
+}
+
+.busca-sem-resultados > i {
+  display: block;
+  margin-bottom: 0.75rem;
+  font-size: 2rem;
+  color: var(--dourado);
+}
+
+.busca-sem-resultados a {
+  display: inline-block;
+  margin-top: 0.75rem;
+  color: var(--marrom);
+  text-decoration: underline;
+}
+
 .filtro-btn {
   font-family: var(--fonte-ui);
   font-size: 0.78rem;
@@ -899,6 +942,20 @@ footer {
   align-items: start;
 }
 
+.confirmacao-layout {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 2rem;
+  align-items: start;
+}
+
+.endereco-confirmacao {
+  margin-bottom: 1rem;
+  font-style: normal;
+  line-height: 1.8;
+  color: var(--texto);
+}
+
 .checkout-form {
   display: flex;
   flex-direction: column;
@@ -1055,7 +1112,13 @@ footer {
 
 @media (max-width: 768px) {
   .checkout-layout { grid-template-columns: 1fr; }
+  .confirmacao-layout { grid-template-columns: 1fr; }
   .checkout-bloco { padding: 22px 18px; }
   .campo-grade .c-2, .campo-grade .c-3, .campo-grade .c-4 { grid-column: span 6; }
   .pagamento-opcoes { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+  .busca-livros { flex-direction: column; }
+  .busca-livros .btn { justify-content: center; }
 }

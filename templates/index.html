@@ -35,30 +35,8 @@
     {% for livro in livros_destaque %}
     <div class="card-livro fadeUp">
       <div class="card-livro-capa" style="background: {{ livro.cor_capa }};">
-        {% if livro.id == 1 %}
-          <img src="{{ url_for('static', filename='image/dom_casmurro.png') }}" alt="Capa de Dom Casmurro">
-        {% elif livro.id == 2 %}
-          <img src="{{ url_for('static', filename='image/grande_sertao_veredas.png') }}" alt="Capa de Grande Sertão: Veredas">
-        {% elif livro.id == 3 %}
-          <img src="{{ url_for('static', filename='image/a_hora_da_estrela.png') }}" alt="Capa de A Hora da Estrela">
-        {% elif livro.id == 4 %}
-          <img src="{{ url_for('static', filename='image/cem_anos_de_solidao.png') }}" alt="Capa de Cem Anos de Solidão">
-        {% elif livro.id == 5 %}
-          <img src="{{ url_for('static', filename='image/uma_breve_historia_do_tempo.png') }}" alt="Capa de Uma Breve História do Tempo">
-        {% elif livro.id == 6 %}
-          <img src="{{ url_for('static', filename='image/sapiens.png') }}" alt="Capa de Sapiens">
-        {% elif livro.id == 7 %}
-          <img src="{{ url_for('static', filename='image/o_senhor_dos_aneis.png') }}" alt="Capa de O Senhor dos Anéis">
-        {% elif livro.id == 8 %}
-          <img src="{{ url_for('static', filename='image/o_pequeno_principe.png') }}" alt="Capa de O Pequeno Príncipe">
-        {% elif livro.id == 9 %}
-          <img src="{{ url_for('static', filename='image/de_zero_a_um.png') }}" alt="Capa de De Zero a Um">
-        {% elif livro.id == 10 %}
-          <img src="{{ url_for('static', filename='image/iracema.png') }}" alt="Capa de Iracema">
-        {% elif livro.id == 11 %}
-          <img src="{{ url_for('static', filename='image/cosmos.png') }}" alt="Capa de Cosmos">
-        {% elif livro.id == 12 %}
-          <img src="{{ url_for('static', filename='image/a_revolucao_dos_bichos.png') }}" alt="Capa de A Revolução dos Bichos">
+        {% if livro.imagem %}
+          <img src="{{ livro.imagem }}" alt="Capa de {{ livro.titulo }}" loading="lazy">
         {% else %}
           <span>{{ livro.emoji }}</span>
         {% endif %}

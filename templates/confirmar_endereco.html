@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block titulo %}Livraria — Confirmar endereço{% endblock %}
+
+{% block conteudo %}
+<div style="background: var(--marrom); padding: 48px 5% 40px;">
+  <p style="font-family: var(--fonte-ui); font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--dourado); margin-bottom: 0.6rem;">✦ Última conferência</p>
+  <h1 style="font-family: var(--fonte-titulo); font-size: clamp(1.8rem,4vw,2.8rem); color: var(--creme); font-weight: 600;">Confirme seu endereço de entrega</h1>
+</div>
+
+<section class="secao">
+  <div class="confirmacao-layout">
+    <div class="checkout-bloco">
+      <h2>Endereço de entrega</h2>
+      <address class="endereco-confirmacao">
+        <strong>{{ dados.nome }}</strong><br>
+        {{ dados.rua }}, {{ dados.numero }}{% if dados.complemento %} — {{ dados.complemento }}{% endif %}<br>
+        {{ dados.bairro }}, {{ dados.cidade }}/{{ dados.estado }}<br>
+        CEP {{ dados.cep }}
+      </address>
+      <a href="{{ url_for('finalizar_compra') }}" class="auth-link">Editar endereço</a>
+    </div>
+
+    <aside class="carrinho-resumo">
+      <h2>Resumo do pedido</h2>
+      {% for item in itens %}
+      <div class="checkout-mini-item">
+        <img src="{{ item.livro.imagem }}" alt="Capa de {{ item.livro.titulo }}" loading="lazy">
+        <div>{{ item.livro.titulo }}<br><small>{{ item.quantidade }} × R$ {{ "%.2f"|format(item.livro.preco) }}</small></div>
+        <span>R$ {{ "%.2f"|format(item.subtotal) }}</span>
+      </div>
+      {% endfor %}
+      <div class="carrinho-resumo-linha">
+        <span>Pagamento</span><span>{{ pagamento_nome }}</span>
+      </div>
+      <div class="carrinho-resumo-linha">
+        <span>Frete</span><span class="carrinho-frete-gratis">Grátis</span>
+      </div>
+      <div class="carrinho-resumo-total">
+        <span>Total</span><span>R$ {{ "%.2f"|format(total) }}</span>
+      </div>
+      <form method="POST" action="{{ url_for('confirmar_pedido') }}">
+        <button type="submit" class="btn btn-primario btn-form">Confirmar endereço e pedido</button>
+      </form>
+      <a href="{{ url_for('carrinho') }}" class="auth-link" style="display:block;">Voltar ao carrinho</a>
+    </aside>
+  </div>
+</section>
+{% endblock %}

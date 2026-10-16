@@ -8,7 +8,7 @@
     <h2>Pedido confirmado!</h2>
     <p class="pedido-num">Pedido nº {{ pedido.numero }}</p>
     <p>Total: <strong>R$ {{ "%.2f"|format(pedido.total) }}</strong> — {{ pedido.pagamento_nome }}</p>
-    <p>Entrega em: {{ pedido.endereco.rua }}, {{ pedido.endereco.numero }}{% if pedido.endereco.complemento %} ({{ pedido.endereco.complemento }}){% endif %} — {{ pedido.endereco.bairro }}, {{ pedido.endereco.cidade }}/{{ pedido.endereco.estado }}, CEP {{ pedido.endereco.cep }}</p>
+    <p>Entrega para {{ pedido.endereco.nome }} em: {{ pedido.endereco.rua }}, {{ pedido.endereco.numero }}{% if pedido.endereco.complemento %} ({{ pedido.endereco.complemento }}){% endif %} — {{ pedido.endereco.bairro }}, {{ pedido.endereco.cidade }}/{{ pedido.endereco.estado }}, CEP {{ pedido.endereco.cep }}</p>
     <a href="{{ url_for('loja') }}" class="btn btn-primario">Continuar comprando</a>
   </div>
 </section>

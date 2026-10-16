@@ -3,120 +3,120 @@
     "id": 1,
     "titulo": "Dom Casmurro",
     "autor": "Machado de Assis",
-    "preco": 34.9,
+    "preco": 34.90,
     "categoria": "literatura",
     "emoji": "📗",
-    "imagem": "image/dom_casmurro.png",
-    "cor_capa": "#D4C5A9"
+    "cor_capa": "#D4C5A9",
+    "imagem": "https://covers.openlibrary.org/b/id/647501-M.jpg"
   },
   {
     "id": 2,
     "titulo": "Grande Sertão: Veredas",
     "autor": "Guimarães Rosa",
-    "preco": 42.5,
+    "preco": 42.50,
     "categoria": "literatura",
     "emoji": "📘",
-    "imagem": "image/grande_sertao_veredas.png",
-    "cor_capa": "#C5B89A"
+    "cor_capa": "#C5B89A",
+    "imagem": "https://covers.openlibrary.org/b/id/4348820-M.jpg"
   },
   {
     "id": 3,
     "titulo": "A Hora da Estrela",
     "autor": "Clarice Lispector",
-    "preco": 29.9,
+    "preco": 29.90,
     "categoria": "literatura",
     "emoji": "📙",
-    "imagem": "image/a_hora_da_estrela.png",
-    "cor_capa": "#BFA98A"
+    "cor_capa": "#BFA98A",
+    "imagem": "https://covers.openlibrary.org/b/id/650866-M.jpg"
   },
   {
     "id": 4,
     "titulo": "Cem Anos de Solidão",
     "autor": "Gabriel García Márquez",
-    "preco": 49.9,
+    "preco": 49.90,
     "categoria": "ficcao",
     "emoji": "📕",
-    "imagem": "image/cem_anos_de_solidao.png",
-    "cor_capa": "#CCC0A0"
+    "cor_capa": "#CCC0A0",
+    "imagem": "https://covers.openlibrary.org/b/id/15185412-M.jpg"
   },
   {
     "id": 5,
     "titulo": "Uma Breve História do Tempo",
     "autor": "Stephen Hawking",
-    "preco": 38.0,
+    "preco": 38.00,
     "categoria": "ciencias",
     "emoji": "🔭",
-    "imagem": "image/uma_breve_historia_do_tempo.png",
-    "cor_capa": "#C8B896"
+    "cor_capa": "#C8B896",
+    "imagem": "https://covers.openlibrary.org/b/id/10432365-M.jpg"
   },
   {
     "id": 6,
     "titulo": "Sapiens",
     "autor": "Yuval Noah Harari",
-    "preco": 54.9,
+    "preco": 54.90,
     "categoria": "historia",
     "emoji": "🏛",
-    "imagem": "image/sapiens.png",
-    "cor_capa": "#D0BC9A"
+    "cor_capa": "#D0BC9A",
+    "imagem": "https://covers.openlibrary.org/b/id/8634250-M.jpg"
   },
   {
     "id": 7,
     "titulo": "O Senhor dos Anéis",
     "autor": "J.R.R. Tolkien",
-    "preco": 89.9,
+    "preco": 89.90,
     "categoria": "ficcao",
     "emoji": "💍",
-    "imagem": "image/o_senhor_dos_aneis.png",
-    "cor_capa": "#C2AF8C"
+    "cor_capa": "#C2AF8C",
+    "imagem": "https://covers.openlibrary.org/b/id/15120680-M.jpg"
   },
   {
     "id": 8,
     "titulo": "O Pequeno Príncipe",
     "autor": "Antoine de Saint-Exupéry",
-    "preco": 24.9,
+    "preco": 24.90,
     "categoria": "infantil",
     "emoji": "⭐",
-    "imagem": "image/o_pequeno_principe.png",
-    "cor_capa": "#D8C89E"
+    "cor_capa": "#D8C89E",
+    "imagem": "https://covers.openlibrary.org/b/id/15231561-M.jpg"
   },
   {
     "id": 9,
     "titulo": "De Zero a Um",
     "autor": "Peter Thiel",
-    "preco": 44.9,
+    "preco": 44.90,
     "categoria": "negocios",
     "emoji": "💼",
-    "imagem": "image/de_zero_a_um.png",
-    "cor_capa": "#C8B88A"
+    "cor_capa": "#C8B88A",
+    "imagem": "https://covers.openlibrary.org/b/id/13173173-M.jpg"
   },
   {
     "id": 10,
     "titulo": "Iracema",
     "autor": "José de Alencar",
-    "preco": 19.9,
+    "preco": 19.90,
     "categoria": "literatura",
     "emoji": "🌿",
-    "imagem": "image/iracema.png",
-    "cor_capa": "#CABA96"
+    "cor_capa": "#CABA96",
+    "imagem": "https://covers.openlibrary.org/b/id/2664651-M.jpg"
   },
   {
     "id": 11,
     "titulo": "Cosmos",
     "autor": "Carl Sagan",
-    "preco": 59.9,
+    "preco": 59.90,
     "categoria": "ciencias",
     "emoji": "🌌",
-    "imagem": "image/cosmos.png",
-    "cor_capa": "#B8A882"
+    "cor_capa": "#B8A882",
+    "imagem": "https://covers.openlibrary.org/b/id/8283901-M.jpg"
   },
   {
     "id": 12,
     "titulo": "A Revolução dos Bichos",
     "autor": "George Orwell",
-    "preco": 27.9,
+    "preco": 27.90,
     "categoria": "ficcao",
     "emoji": "🐷",
-    "imagem": "image/a_revolucao_dos_bichos.png",
-    "cor_capa": "#D2C4A2"
+    "cor_capa": "#D2C4A2",
+    "imagem": "https://covers.openlibrary.org/b/id/15200524-M.jpg"
   }
 ]
